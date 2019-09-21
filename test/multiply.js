@@ -12,11 +12,13 @@ describe("Multiply - используется для умножения", functi
 
   it('Умножение дробных', () => expect(multiply('-2.5b','0.5bz')).to.equal('-1.25bbz') );
 
-  it('Умножение дробных', () => expect(multiply('-2.50b','0.5bz')).to.equal('-1.25bbz') );
+  it('Умножение дробных если в конце дробного числа 0', () => expect(multiply('-2.50b','0.5bz')).to.equal('-1.25bbz') );
 
   it('Умножение с минусами',() => expect(multiply('-2b','-3bb')).to.equal('6bbb') );
 
   it('Умножение чисел',() => expect(multiply('-2','3')).to.equal('-6') );
+
+  it('Умножение дробных чисел',() => expect(multiply('-0.010','0.20')).to.equal('-0.002') );
 
   it('Умножение числа на 0',() => expect(multiply('-2','0')).to.equal('0') );
 

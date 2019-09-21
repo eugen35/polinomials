@@ -8,6 +8,8 @@ describe("Split - разделяем число и буквы", function () { //
   it('Split',() => expect(split('-2.03baz')).to.deep.equal({numberStr:'-2.03', letters:'baz'}));
   it('Split',() => expect(split('-2.0300baz')).to.deep.equal({numberStr:'-2.0300', letters:'baz'}));
   it('Split',() => expect(split('2.0300baz')).to.deep.equal({numberStr:'2.0300', letters:'baz'}));
+  it('Split - если нет букв',() => expect(split('2.0300')).to.deep.equal({numberStr:'2.0300', letters:''}));
+  it('Split - если нет букв и цифра начинается с нуля',() => expect(split('-0.0300')).to.deep.equal({numberStr:'-0.0300', letters:''}));
 });
 
 

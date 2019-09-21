@@ -1,5 +1,7 @@
 /** @module some */
 
+
+
 /**
  * @function split - function to split number-letters
  * @returns {Object}
@@ -7,7 +9,8 @@
  */
 export function split (a) {
   const firstLetterPos = a.search(/[a-zA-Z]/);
-  return {numberStr: a.slice(0, firstLetterPos), letters: a.slice(firstLetterPos)};
+  if (0 <= firstLetterPos) return {numberStr: a.slice(0, firstLetterPos), letters: a.slice(firstLetterPos)}; // Если буквы встречаются
+  return {numberStr: a, letters:''};
 }
 
 /**
@@ -17,13 +20,10 @@ export function split (a) {
  * @param {string} b - term b
  */
 export function sum (a,b) {
-  const numberOfA = parseFloat(a);
-  const numberOfB = parseFloat(b);
-  const lettersOfA = a.split(numberOfA)[1];
-  const lettersOfB = b.split(numberOfB)[1];
-  if (lettersOfA !== lettersOfB) throw (new Error('Sum: Letters (variables) of terms are not equal. Addition (subtraction) is impossible!'));
-  const sum = '' + (numberOfA + numberOfB) + lettersOfA;
-  return sum;
+  const partsOfA = split(a);
+  const partsOfB = split(b);
+  if (partsOfA.letters !== partsOfB.letters) throw (new Error('Sum: Letters (variables) of terms are not equal. Addition (subtraction) is impossible!'));
+  return '' + ((parseFloat(partsOfA.numberStr) + parseFloat(partsOfB.numberStr))) + partsOfA.letters;
 }
 
 /**
@@ -32,9 +32,8 @@ export function sum (a,b) {
  * @param {string} a - argument (may be unsorted)
  */
 export function sort (a) {
-  const number = parseFloat(a);
-  const letters = a.split(number)[1];
-  return ''+number+letters.split('').sort().join('');
+  const parts = split(a);
+  return parts.numberStr + parts.letters.split('').sort().join('');
 }
 
 /**
@@ -44,12 +43,10 @@ export function sort (a) {
  * @param {string} b - multiplier b
  */
 export function multiply (a,b) {
-  const numberOfA = parseFloat(a);
-  const numberOfB = parseFloat(b);
-  if (0 === numberOfA || 0 === numberOfB) return '0';
-  const lettersOfA = a.split(numberOfA)[1];
-  const lettersOfB = b.split(numberOfB)[1];
-  return sort('' + (numberOfA * numberOfB) + lettersOfA + lettersOfB);
+  const partsOfA = split(a);
+  const partsOfB = split(b);
+  if ('0' === partsOfA.numberStr || '0' === partsOfB.numberStr) return '0';
+  return sort('' + (parseFloat(partsOfA.numberStr) * parseFloat(partsOfB.numberStr)) + partsOfA.letters+partsOfB.letters);
 }
 
 /**
