@@ -22,3 +22,27 @@ export function sort(a) {
   const parts = split(a);
   return parts.numberStr + parts.letters.split('').sort().join('');
 }
+
+/**
+ * @function reduction - function to divide letters
+ * @returns {string} quotient - quotient from division
+ * @param {string} numerator - only lettersPart of numerator
+ * @param {string} denominator - only lettersPart of denominator
+ * Можно сделать ещё так, что если какую букву не нашёл, то снова не искать... Но для этого ещё одна переменная и одно сравнение нужно, - будет ли быстрее?
+ */
+export function reduction(numerator, denominator) {
+  if ('' === denominator) return numerator;
+  if ('' === numerator) return '/' + denominator;
+  let prevNumerator = numerator;
+  let curNumerator = numerator;
+  let remainingDenominator = denominator;
+  for (let i=0;i<denominator.length;i++){
+    curNumerator = curNumerator.replace(denominator[i],'');
+    if (prevNumerator !== curNumerator) {
+      remainingDenominator = remainingDenominator.replace(denominator[i],'');
+      prevNumerator = curNumerator;
+    }
+  }
+  if ('' === remainingDenominator) return curNumerator;
+  return curNumerator + '/' + remainingDenominator;
+}

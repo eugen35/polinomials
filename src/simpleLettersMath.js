@@ -31,18 +31,16 @@ export function multiply (a,b) {
 /**
  * @function divide - function to divide
  * @returns {string} quotient - quotient from division
- * @param {string} numerator - multiplier numerator
- * @param {string} denominator - multiplier denominator
+ * @param {string} numerator
+ * @param {string} denominator
  */
-export function divide (numerator,denominator) {
-  const numberOfDenominator = parseFloat(denominator);
-  if (0 === numberOfDenominator) throw (new Error('Divide: Division by zero!'));
-  if (1 === numberOfDenominator) return numerator;
+export function divide (numerator, denominator) {
+  const partsOfDenominator = split(denominator);
+  if ('0' === partsOfDenominator.numberStr) throw (new Error('Divide: Division by zero!'));
+  if ('1' === partsOfDenominator.numberStr) return numerator;
 
-  const numberOfNumerator = parseFloat(numerator);
-  if (0 === numberOfNumerator) return '0';
+  const partsOfNumerator = split(numerator);
+  if ('0' === partsOfNumerator.numberStr) return '0';
 
-  const lettersOfA = numerator.split(numberOfNumerator)[1];
-  const lettersOfB = denominator.split(numberOfDenominator)[1];
-  return sort('' + (numberOfNumerator * numberOfDenominator) + lettersOfA + lettersOfB);
+  return sort('' + (parseFloat(partsOfNumerator.numberStr) / parseFloat(partsOfDenominator.numberStr)));
 }
