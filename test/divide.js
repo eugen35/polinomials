@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {divide, multiply} from "../src/some";
+import {divide, multiply} from "../src/simpleLettersMath";
 
 describe("Divide - используется для деления", function () { // function() вместо ()=> нужно писать чтобы timeout не ругался. Это неведомый глюк
   // this.timeout(15000);

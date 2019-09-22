@@ -1,4 +1,4 @@
-import {sum} from "./src/some";
+import {sum} from "./src/simpleLettersMath";
 
 console.log('Start counting');
 const s=sum(2,3);

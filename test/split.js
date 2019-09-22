@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {split} from "../src/some";
+import {split} from "../src/helpers";
 
 describe("Split - разделяем число и буквы", function () { // function() вместо ()=> нужно писать чтобы timeout не ругался. Это неведомый глюк
   // this.timeout(15000);

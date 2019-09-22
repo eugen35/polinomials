@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {sort} from "../src/some";
+import {sort} from "../src/helpers";
 
 describe("Sort - используется для умножения", function () { // function() вместо ()=> нужно писать чтобы timeout не ругался. Это неведомый глюк
   // this.timeout(15000);

@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {multiply} from "../src/some";
+import {multiply} from "../src/simpleLettersMath";
 
 describe("Multiply - используется для умножения", function () { // function() вместо ()=> нужно писать чтобы timeout не ругался. Это неведомый глюк
   // this.timeout(15000);

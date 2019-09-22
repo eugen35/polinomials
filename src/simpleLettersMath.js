@@ -1,17 +1,6 @@
-/** @module some */
+/** @module simpleLettersMath */
 
-
-
-/**
- * @function split - function to split number-letters
- * @returns {Object}
- * @param {string} a - number-letters
- */
-export function split (a) {
-  const firstLetterPos = a.search(/[a-zA-Z]/);
-  if (0 <= firstLetterPos) return {numberStr: a.slice(0, firstLetterPos), letters: a.slice(firstLetterPos)}; // Если буквы встречаются
-  return {numberStr: a, letters:''};
-}
+import {sort, split} from "./helpers";
 
 /**
  * @function sum - function to addition and subtraction
@@ -24,16 +13,6 @@ export function sum (a,b) {
   const partsOfB = split(b);
   if (partsOfA.letters !== partsOfB.letters) throw (new Error('Sum: Letters (variables) of terms are not equal. Addition (subtraction) is impossible!'));
   return '' + ((parseFloat(partsOfA.numberStr) + parseFloat(partsOfB.numberStr))) + partsOfA.letters;
-}
-
-/**
- * @function sort - function to sort letters (number with sign remain in its place)
- * @returns {string} sorted argument
- * @param {string} a - argument (may be unsorted)
- */
-export function sort (a) {
-  const parts = split(a);
-  return parts.numberStr + parts.letters.split('').sort().join('');
 }
 
 /**
