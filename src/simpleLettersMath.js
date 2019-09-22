@@ -1,6 +1,6 @@
 /** @module simpleLettersMath */
 
-import {sort, split} from "./helpers";
+import {sort, split, reduce} from "./helpers";
 
 /**
  * @function sum - function to addition and subtraction
@@ -42,5 +42,5 @@ export function divide (numerator, denominator) {
   const partsOfNumerator = split(numerator);
   if ('0' === partsOfNumerator.numberStr) return '0';
 
-  return sort('' + (parseFloat(partsOfNumerator.numberStr) / parseFloat(partsOfDenominator.numberStr)));
+  return sort('' + (parseFloat(partsOfNumerator.numberStr) / parseFloat(partsOfDenominator.numberStr)) + reduce(partsOfNumerator.letters, partsOfDenominator.letters));
 }

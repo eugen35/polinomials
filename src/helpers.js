@@ -4,13 +4,22 @@
  * @function split - function to split number-letters
  * @returns {Object} parts
  * @returns {string} parts.numberStr
- * @returns {string} parts.letters
+ * @returns {string} parts.letters - letters of numerator
+ * @returns {string} parts.denominatorLetters - letters of denominator
  * @param {string} a - number-letters
  */
 export function split(a) {
-  const firstLetterPos = a.search(/[a-zA-Z]/);
-  if (0 <= firstLetterPos) return {numberStr: a.slice(0, firstLetterPos), letters: a.slice(firstLetterPos)}; // Если буквы встречаются
-  return {numberStr: a, letters: ''};
+  const aArr = a.split('/');
+  const firstLetterPos = aArr[0].search(/[a-zA-Z]/);
+  let numberStr = '';
+  let letters = '';
+  if (0 <= firstLetterPos) { // Если буквы встречаются в числителе
+    numberStr = aArr[0].slice(0, firstLetterPos);
+    letters = aArr[0].slice(firstLetterPos);
+  } else {
+    numberStr = a;
+  }
+  return {numberStr, letters, denominatorLetters: aArr[1] || '' };
 }
 
 /**
@@ -20,17 +29,17 @@ export function split(a) {
  */
 export function sort(a) {
   const parts = split(a);
-  return parts.numberStr + parts.letters.split('').sort().join('');
+  return parts.numberStr + parts.letters.split('').sort().join('') + ('' === parts.denominatorLetters ? '': ('/' + parts.denominatorLetters.split('').sort().join('')));
 }
 
 /**
- * @function reduction - function to divide letters
+ * @function reduce - function to divide letters
  * @returns {string} quotient - quotient from division
  * @param {string} numerator - only lettersPart of numerator
  * @param {string} denominator - only lettersPart of denominator
  * Можно сделать ещё так, что если какую букву не нашёл, то снова не искать... Но для этого ещё одна переменная и одно сравнение нужно, - будет ли быстрее?
  */
-export function reduction(numerator, denominator) {
+export function reduce(numerator, denominator) {
   if ('' === denominator) return numerator;
   if ('' === numerator) return '/' + denominator;
   let prevNumerator = numerator;
